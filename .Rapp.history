@@ -1,0 +1,277 @@
+bdrms = hpricedata$bdrms
+price.lm = lm(price ~ sqrft + bdrms, data = hpricedata)
+summary(price.lm)
+coeffs = coefficients(hprice.lm); coeffs
+coeffs = coefficients(price.lm); coeffs
+coeffs[2]
+coeffs[1] + coeffs[2]*140
+dprice = coeffs[3] + coeffs[2]*140; dprice
+b3 = coeffs[3]; b3
+b2 = coeffs[2]; b2
+brs = b2*140; brs
+bds + b3
+brs + b3
+newdata = data.frame(sqrft = 2438 + bdrms = 4)
+newdata = data.frame(sqrft = 2438, bdrms = 4)
+predict(price.lm,newdata)
+300-354.61
+ceosaldata = read.csv("/Users/suvasama/Documents/R/Wooldridge/Ch3/ceosal2.csv")
+salary = ceosaldata$salary
+sales = ceosaldata$sales
+mktval = ceosaldata$mktval
+salary.lm = lm(log(salary) ~ log(sales) + log(mktval))
+summary(salary.lm)
+profits = ceosaldata$profits
+salary2.lm = lm(log(salary) ~ log(sales) + log(mktval) + profits)
+summary(salary2.lm)
+salary3.lm = lm(salary ~ sales + mktval + profits)
+summary(salary3.lm)
+ceoten = ceosaldata$ceoten
+salary4.lm = lm(log(salary) ~ log(sales) + log(mktval) + profits + log(ceoten))
+salary4.lm = lm(log(salary) ~ log(sales) + log(mktval) + profits + ceoten)
+summary(salary4.lm)
+cor(log(mktval),profits)
+salary5.lm = lm(log(salary) ~ log(sales) + log(mktval) + ceoten)
+summary(salary5.lm)
+salary6.lm = lm(log(salary) ~ log(sales) + profits + ceoten)
+summary(salary.6)
+summary(salary6.lm)
+attenddata = read.csv("/Users/suvasama/Documents/R/Wooldridge/Ch3/attend.csv")
+atndrte = attenddata$atndrte
+priGPA = attenddate$priGPA
+priGPA = attenddata$priGPA
+act = attenddata$ACT
+range(atndrte)
+range(priGPA)
+range(act)
+mean(atndrte)
+mean(priGPA)
+mean(act)
+atndrte.lm = lm(atndrte ~ priGPA + act)
+summary(atndrte.lm)
+newdata = data.frame(priGPA = 3.65, act = 20)
+predict(atndrte.lm, newdata)
+dataA = data.frame(priGPA = 3.1, act = 21)
+dataB = data.frame(priGPA = 2.1, act = 26)
+predA = predict(atndrte.lm, dataA)
+predB = predict(atndrte.lm, dataB)
+predA
+predB
+predA - predB
+wagedata = read.csv("/Users/suvasama/Documents/R/Wooldridge/Ch3/wage1.csv")
+wage = wagedata$wage
+educ = wagedata$educ
+exper = wagedat$exper
+exper = wagedata$exper
+tenure = wagedata$tenure
+logwage.lm = lm(log(wage) ~ educ + exper + tenure)
+summary(logwage.lm)
+r1 = resid(logwage.lm,educ)
+r = resid(logwage.lm)
+r
+educ.lm = lm(educ ~ exper + tenure)
+r1 = resid(educ.lm)
+logwage2 = lm(log(wage) ~ r1)
+summary(logwage2.lm)
+logwage2.lm = lm(log(wage) ~ r1)
+summary(logwage2.lm)
+wage2data = read.csv("/Users/suvasama/Documents/R/Wooldridge/Ch3/wage2.csv")
+wage = wage2data$wage
+iq = wage2data$IQ
+educ = wage2data$educ
+iq.lm = lm(iq ~ educ)
+d1 = coefficients(iq.lm); d1
+d1 = d1[2]; d1
+logwage.lm = lm(log(wage) ~ educ)
+b1 = coefficients(logwage.lm)
+b1 = b1[2]; b1
+logwage.lm = lm(log(wage) ~ educ + iq)
+coeffs = coefficients(logwage.lm)
+bhat1 = coeffs[2]; bhat2 = coeffs[3]
+bhat1 + bhat2*d1
+qt(c(.44),df = 209)
+qt(c(.1),df = 209)
+qt(c(.9),df = 209)
+qt(c(.95),df = 32)
+qt(c(.9),df = 32)
+qt(c(.01), df = 64)
+qt(c(.05),df = 64)
+qt(c(.1),df = 64)
+qt(c(.01),df = 120)
+qt(c(.01),df = 1200)
+qt(c(.99),df = 64)
+qt(c(.01/2),df = 64)
+qt(c(.99/2),df = 64)
+qt(c(1-.01/2),df = 64)
+qt(c(1-.05/2), df = 141)
+qt(c(1-.05/2), df = 88)
+qt(c(.05/2,1-.05/2), df = 88)
+qf(.95,df1=2,df2=88)
+qf(.99,df1=2,df2=88)
+qf(.999,df1=2,df2=88)
+qf(.9999,df1=2,df2=88)
+qf(.999,df1=2,df2=88)
+qf(.95,df1=3,df2=83)
+qf(.99,df1=3,df2=83)
+qf(.9,df1=3,df2=83)
+qt(c(.95),df=43)
+qt(c(.05/2,1-.05/2),df=43)
+qt(c(.01/2,1-.01/2),df=43)
+exit
+close
+setwd("/Users/suvasama/Documents/R/ISLR")
+source("5.7_Weekly_LOOCV")
+source("5.7_Weekly_LOOCV.r")
+attach(Weekly)
+library(ISLR)
+attach(Weekly)
+weekly.glm = glm(Direction ~ Lag1 + Lag2,  family = binomial)
+weekly.probs = predict(weekly.glm, type = 'response')
+weekly.probs1 = predict(weekly.glm[-1], type = 'response')
+dim(weekly.glm[-1])
+length(weekly.glm[-1])
+length(weekly.glm)
+weekly.glm1 = weekly.glm[-1]#
+weekly.probs1 = predict(weekly.glm1, type = 'response')
+Weekly1 = Weekly[-1]#
+weekly1.glm = glm(Direction ~ Lag1 + Lag2,  family = binomial, data = Weekly1)
+weekly.probs1 = predict(weekly.glm1, type = 'response')
+weekly1.glm = glm(Direction ~ Lag1 + Lag2,  family = binomial, data = Weekly1)
+summary(weekly1)
+summary(weekly1.glm)
+weekly.probs1 = predict(weekly.glm1, type = 'response')
+weekly1.glm = NULL
+weekly.probs1 = predict(weekly.glm1, type = 'response')
+weekly.probs1 = predict(weekly.glm, type = 'response')
+weekly.probs1 = predict(weekly.glm2, type = 'response')
+weeklyred.glm = glm(Direction ~ Lag1 + Lag2,  family = binomial, data = Weekly1)
+weekly.probs1 = predict(weeklyred.glm, type = 'response')
+help(predict)
+dim(Weekly)
+dim(Weekly[1])
+dim(Weekly[1,])
+weekly.probs_first = predict(weeklyred.glm, newdata = Weekly[1,], type = 'response', )
+weekly.probs_first
+Weekly[1,1]
+summary(Weekly)
+Weekly[1,9]
+weekly.pred = "Down"; weekly.pred[weekly.probs_first > .5] = "Up"
+Direction[1]
+if (Direction[1] == weekly.pred) {#
+	print(1)#
+} else {#
+	print(0)#
+}
+source("5.7_Weekly_LOOCV.r")
+weekly.pred
+source("5.7_Weekly_LOOCV.r")
+length(weekly.probs)
+predict(weeklyred.glm, newdata = Direction[i], type = 'response')
+Direction[i]
+weekly.probs = predict(weeklyred.glm, newdata = Weekly[i], type = 'response')
+weekly.probs = predict(weeklyred.glm, newdata = Weekly[i,], type = 'response')
+source("5.7_Weekly_LOOCV.r")
+errors
+weekly.pred
+Direction[length(Direction)]
+set.seed(1)#
+x = rnorm(100)#
+y = x - 2*x^2 + rnorm(100)
+plot(x,y)
+y.lm = lm(y ~ x)
+summary(y.lm)
+y2.lm = lm(y ~ x + x^2)#
+y3.lm = lm(y ~ x + x^2 + x^3)#
+y4.lm = lm(y ~ x + x^2 + x^3 + x^4)
+summary(y2.lm)
+summary(y3.lm)
+data = data.frame(X = x, Y = y)
+summary(data)
+y.lm = lm(Y ~ X, data = data)#
+y2.lm = lm(Y ~ X + X^2, data = data)#
+y3.lm = lm(Y ~ X + X^2 + X^3, data = data)#
+y4.lm = lm(Y ~ X + X^2 + X^3 + X^4, data = data)
+summary(y2.lm)
+y2.lm = lm(y ~ x + (x^2))
+summary(y2.lm)
+y2.lm = lm(y ~ poly(x,2))
+summary(y2.lm)
+y3.lm = lm(y ~ poly(x,3))#
+y4.lm = lm(y ~ poly(x,4))
+summary(y3.lm)
+summary(y4.lm)
+library(boot)
+y.glm = glm(y ~ x)#
+y2.glm = glm(y ~ poly(x,2))#
+y3.glm = glm(y ~ poly(x,3))#
+y4.glm = glm(y ~ poly(x,4))
+cv.err = cv.glm(xy, y.glm); cv.err$delta#
+cv.err = cv.glm(xy, y2.glm); cv.err$delta#
+cv.err = cv.glm(xy, y3.glm); cv.err$delta#
+cv.err = cv.glm(xy, y4.glm); cv.err$delta
+xy = data.frame(X = x, Y = y)#
+cv.err = cv.glm(xy, y.glm); cv.err$delta#
+cv.err = cv.glm(xy, y2.glm); cv.err$delta#
+cv.err = cv.glm(xy, y3.glm); cv.err$delta#
+cv.err = cv.glm(xy, y4.glm); cv.err$delta
+warnings()
+source("5.8_SimulatedData_cv.r")
+source("5.8_SimulatedData_cv.r")
+source("5.8_SimulatedData_cv.r")
+library(MASS)#
+attach(Boston); names(Boston) # plus whatever you need
+mu = mean(medv)
+mu
+sigma = sd(medv)/sqrt(length(medv)); sigma
+boot(medv, sd)
+boot(medv, sd, 10)
+source("sigmahat.fn.r")
+boot(medv, sigmahat, 10)
+boot(medv, sigmahat.fn, 10)
+boot(medv, mean, 10)
+source("sigmahat.fn.r")
+boot(medv, sigmahat.fn, 10)
+sigma
+mean(x)
+sd(x)
+x
+boot(medv, sigmahat.fn, 10)
+se_boot = boot(medv, sigmahat.fn, 10); se_boot = se_boot[3]
+se_boot
+se_boot = boot(medv, sigmahat.fn, 10);
+se_boot
+se_boot[6]
+se_boot$std.error
+se_boot$original
+se_boot$mean
+se_boot$t
+se_boot$t0
+se_boot[1]
+se_boot[2]
+se_boot[3]
+se_boot[4]
+se_boot[5]
+se_boot[6]
+se_boot[7]
+se_boot[8]
+se_boot[9]
+se_boot[10]
+se_boot[11]
+se_boot[12]
+se_boot[0]
+boot(medv, sigmahat.fn, 10)
+se = sd(se_boot$t)
+se
+mu + 2*0.4278641#
+mu - 2*0.4278641#
+t.test(Boston$medv)
+source("med.fn.r")
+boot(medv, med.fn, 10)
+help(quantile)
+mu01 = quantile(medv, type = 10)
+mu01 = quantile(Boston$medv, type = 10)
+mu01 = quantile(medv, probs = .1)
+mu01
+source("mu01.fn.r")
+boot(medv, mu01.fn, 10)
+q()
